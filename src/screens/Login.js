@@ -2,17 +2,39 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import Input from '../components/Input';
 import Button from '../components/Button';
+import {Formik} from 'formik';
 
 const Login = ({navigation}) => {
+  function handleLogin(values) {
+    console.log(values);
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.title_container}>
         <Text style={styles.title}>codetalks</Text>
       </View>
       <View style={styles.input_container}>
-        <Input text="e-postanızı giriniz" />
-        <Input text="şifrenizi giriniz" isSecure />
-        <Button title="Giriş Yap" />
+        <Formik
+          initialValues={{email: '', password: ''}}
+          onSubmit={handleLogin}>
+          {({handleChange, handleSubmit, values}) => (
+            <>
+              <Input
+                onChangeText={handleChange('email')}
+                value={values.email}
+                text="e-postanızı giriniz"
+              />
+              <Input
+                onChangeText={handleChange('password')}
+                value={values.password}
+                text="şifrenizi giriniz"
+                isSecure
+              />
+              <Button title="Giriş Yap" onPress={handleSubmit} />
+            </>
+          )}
+        </Formik>
         <Button
           title="Kayıt Ol"
           light

@@ -24,7 +24,7 @@ const HomeStack = () => {
 };
 
 const Router = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
 
   return (
     <NavigationContainer>
