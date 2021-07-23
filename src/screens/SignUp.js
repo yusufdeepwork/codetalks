@@ -3,7 +3,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import Input from '../components/Input';
 import Button from '../components/Button';
 
-const Login = ({navigation}) => {
+const SignUp = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.title_container}>
@@ -12,18 +12,16 @@ const Login = ({navigation}) => {
       <View style={styles.input_container}>
         <Input text="e-postanızı giriniz" />
         <Input text="şifrenizi giriniz" isSecure />
-        <Button title="Giriş Yap" />
-        <Button
-          title="Kayıt Ol"
-          light
-          onPress={() => navigation.navigate('SignUp')}
-        />
+        <Input text="şifrenizi tekrar giriniz" isSecure />
+
+        <Button title="Kayıt Ol" />
+        <Button title="Geri" light onPress={() => navigation.goBack()} />
       </View>
     </View>
   );
 };
 
-export default Login;
+export default SignUp;
 
 const styles = StyleSheet.create({
   container: {
