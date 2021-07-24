@@ -13,7 +13,7 @@ const Home = () => {
         keyExtractor={(item, index) => index}
         numColumns={2}
       />
-      <FloatingButton />
+      <FloatingButton iconType="plus" />
     </View>
   );
 };
