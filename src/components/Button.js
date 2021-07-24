@@ -1,9 +1,15 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, Text} from 'react-native';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  ActivityIndicator,
+} from 'react-native';
 
-function Button({title, onPress, light}) {
+function Button({title, onPress, light, disabled}) {
   return (
     <TouchableOpacity
+      disabled={disabled}
       style={light ? [styles.button, styles.lightButton] : styles.button}
       onPress={onPress}>
       <Text style={light ? [styles.title, styles.lightTitle] : styles.title}>

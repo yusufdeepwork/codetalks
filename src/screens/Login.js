@@ -1,12 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import {Formik} from 'formik';
+import auth from '@react-native-firebase/auth';
 
 const Login = ({navigation}) => {
+  const [isProcessing, setIsProcessing] = useState(false);
+
   function handleLogin(values) {
-    console.log(values);
+    setIsProcessing(true);
+    auth()
+      .signInWithEmailAndPassword(values.email, values.password)
+      .then(() => {
+        setIsProcessing(false);
+      })
+      .catch(error => {
+        console.log(error.code);
+        setIsProcessing(false);
+      });
   }
 
   return (
@@ -31,7 +43,11 @@ const Login = ({navigation}) => {
                 text="şifrenizi giriniz"
                 isSecure
               />
-              <Button title="Giriş Yap" onPress={handleSubmit} />
+              <Button
+                title="Giriş Yap"
+                disabled={isProcessing || !values.password || !values.email}
+                onPress={handleSubmit}
+              />
             </>
           )}
         </Formik>

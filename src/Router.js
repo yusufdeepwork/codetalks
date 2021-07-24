@@ -6,10 +6,12 @@
  * @flow strict-local
  */
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import auth from '@react-native-firebase/auth';
+
 import Login from './screens/Login';
 import SignUp from './screens/SignUp';
 import Home from './screens/Home';
@@ -25,6 +27,12 @@ const HomeStack = () => {
 
 const Router = () => {
   const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    auth().onAuthStateChanged(user => {
+      setIsLogin(!!user);
+    });
+  }, []);
 
   return (
     <NavigationContainer>
