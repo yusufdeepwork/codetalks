@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   category: {
-    fontSize: 50,
+    fontSize: 35,
     color: '#fe9f41',
   },
 });
