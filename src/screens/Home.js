@@ -1,6 +1,7 @@
 import React from 'react';
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native';
 import RoomCard from '../components/RoomCard';
+import FloatingButton from '../components/FloatingButton';
 
 const Home = () => {
   const renderRoom = ({item}) => <RoomCard room={item} />;
@@ -12,6 +13,7 @@ const Home = () => {
         keyExtractor={(item, index) => index}
         numColumns={2}
       />
+      <FloatingButton />
     </View>
   );
 };
