@@ -20,7 +20,15 @@ const Stack = createStackNavigator();
 const HomeStack = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{
+          headerTitle: 'Odalar',
+          headerTitleStyle: {color: '#f9a144'},
+          headerTitleAlign: 'center',
+        }}
+      />
     </Stack.Navigator>
   );
 };
