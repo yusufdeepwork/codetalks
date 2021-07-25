@@ -4,7 +4,7 @@ import RoomCard from '../components/RoomCard';
 import FloatingButton from '../components/FloatingButton';
 import ContentInputModal from '../components/ContentInputModal';
 
-const Home = () => {
+const Home = ({navigation}) => {
   const [isOpen, setIsOpen] = useState(false);
   const handleRoomInput = content => {
     console.log(content);
@@ -12,7 +12,11 @@ const Home = () => {
 
   const toggleContent = () => setIsOpen(!isOpen);
 
-  const renderRoom = ({item}) => <RoomCard room={item} />;
+  const navigateRoom = item => navigation.navigate('Room', {roomName: item});
+
+  const renderRoom = ({item}) => (
+    <RoomCard onPress={() => navigateRoom(item)} room={item} />
+  );
   return (
     <View style={styles.container}>
       <FlatList

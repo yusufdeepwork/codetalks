@@ -11,10 +11,12 @@ import 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import auth from '@react-native-firebase/auth';
+import {HeaderBackButton} from '@react-navigation/stack';
 
 import Login from './screens/Login';
 import SignUp from './screens/SignUp';
 import Home from './screens/Home';
+import Room from './screens/Room';
 const Stack = createStackNavigator();
 
 const HomeStack = () => {
@@ -28,6 +30,22 @@ const HomeStack = () => {
           headerTitleStyle: {color: '#f9a144'},
           headerTitleAlign: 'center',
         }}
+      />
+      <Stack.Screen
+        name="Room"
+        component={Room}
+        options={({route}) => ({
+          title: route.params.roomName,
+          headerTitleStyle: {color: '#f9a144'},
+          headerTitleAlign: 'center',
+          headerLeft: props => (
+            <HeaderBackButton
+              {...props}
+              tintColor={'#f9a144'}
+              label={() => route.params.roomName}
+            />
+          ),
+        })}
       />
     </Stack.Navigator>
   );
