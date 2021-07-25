@@ -2,9 +2,9 @@ import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
-const FloatingButton = ({iconType}) => {
+const FloatingButton = ({iconType, onPress}) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity onPress={onPress} style={styles.container}>
       <Icon name={iconType} size={20} style={styles.icon} />
     </TouchableOpacity>
   );
