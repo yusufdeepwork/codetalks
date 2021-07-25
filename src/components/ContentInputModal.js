@@ -6,6 +6,10 @@ import Input from './Input';
 
 const ContentInputModal = ({visible, onClose, onSend}) => {
   const [content, setContent] = useState(null);
+  const handleSend = () => {
+    onSend(content);
+    setContent(null);
+  };
   return (
     <Modal
       style={styles.modal}
@@ -23,7 +27,7 @@ const ContentInputModal = ({visible, onClose, onSend}) => {
             text="Oda adı..."
           />
         </View>
-        <Button onPress={() => onSend(content)} title="Ekle" />
+        <Button onPress={handleSend} title="Ekle" />
       </View>
     </Modal>
   );
