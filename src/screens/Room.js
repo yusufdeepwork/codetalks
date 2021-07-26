@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
 import FloatingButton from '../components/FloatingButton';
 import ContentInputModal from '../components/ContentInputModal';
+import MessageCard from '../components/MessageCard';
 
 const Room = ({route}) => {
   const [isClose, setIsClose] = useState(false);
@@ -14,6 +15,8 @@ const Room = ({route}) => {
     setIsClose(!isClose);
   };
 
+  const renderMessage = ({item}) => <MessageCard />;
+
   return (
     <View style={styles.container}>
       <Text
@@ -25,6 +28,11 @@ const Room = ({route}) => {
         onSend={handleSend}
         onClose={toggleClose}
         visible={isClose}
+      />
+      <FlatList
+        data={['1', '1', '1', '1', '1', '2', '2', '3']}
+        renderItem={renderMessage}
+        keyExtractor={(item, index) => index}
       />
       <FloatingButton onPress={toggleClose} iconType="plus" />
     </View>
