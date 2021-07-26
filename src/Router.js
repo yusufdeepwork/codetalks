@@ -17,9 +17,14 @@ import Login from './screens/Login';
 import SignUp from './screens/SignUp';
 import Home from './screens/Home';
 import Room from './screens/Room';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import {TouchableOpacity} from 'react-native';
 const Stack = createStackNavigator();
 
 const HomeStack = () => {
+  const logout = () => {
+    auth().signOut();
+  };
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -44,6 +49,16 @@ const HomeStack = () => {
               tintColor={'#f9a144'}
               label={() => route.params.roomName}
             />
+          ),
+          headerRight: props => (
+            <TouchableOpacity onPress={logout}>
+              <Icon
+                name="sign-out-alt"
+                color={'#f9a144'}
+                size={25}
+                style={{marginRight: 10}}
+              />
+            </TouchableOpacity>
           ),
         })}
       />

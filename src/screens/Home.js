@@ -24,6 +24,7 @@ const Home = ({navigation}) => {
       .on('value', snapshot => {
         snapshot.val() && setRoomList(Object.keys(snapshot.val()));
       });
+    return '';
   }, []);
   const toggleContent = () => setIsOpen(!isOpen);
 
