@@ -1,21 +1,42 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import FloatingButton from '../components/FloatingButton';
 import ContentInputModal from '../components/ContentInputModal';
 import MessageCard from '../components/MessageCard';
+import database from '@react-native-firebase/database';
+import auth from '@react-native-firebase/auth';
+import parseMessageData from '../utils/parseMessageData';
 
 const Room = ({route}) => {
   const [isClose, setIsClose] = useState(false);
+  const [messageList, setMessageList] = useState([]);
+
+  useEffect(() => {
+    database()
+      .ref(`/rooms/${route.params.roomName}/messages/`)
+      .on('value', snapshot => {
+        setMessageList(parseMessageData(snapshot.val()));
+      });
+  }, []);
 
   const handleSend = message => {
-    console.log(message);
+    const newReference = database()
+      .ref(`/rooms/${route.params.roomName}/messages`)
+      .push();
+    newReference
+      .set({
+        author: auth().currentUser.email.split('@')[0],
+        content: message,
+        date: new Date().toISOString(),
+      })
+      .then(() => {});
     toggleClose();
   };
   const toggleClose = () => {
     setIsClose(!isClose);
   };
 
-  const renderMessage = ({item}) => <MessageCard />;
+  const renderMessage = ({item}) => <MessageCard message={item} />;
 
   return (
     <View style={styles.container}>
@@ -30,7 +51,7 @@ const Room = ({route}) => {
         visible={isClose}
       />
       <FlatList
-        data={['1', '1', '1', '1', '1', '2', '2', '3']}
+        data={messageList}
         renderItem={renderMessage}
         keyExtractor={(item, index) => index}
       />
