@@ -15,7 +15,7 @@ const Room = ({route}) => {
     database()
       .ref(`/rooms/${route.params.roomName}/messages/`)
       .on('value', snapshot => {
-        setMessageList(parseMessageData(snapshot.val()));
+        snapshot.val() && setMessageList(parseMessageData(snapshot.val()));
       });
   }, []);
 
