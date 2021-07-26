@@ -4,7 +4,7 @@ import Modal from 'react-native-modal';
 import Button from './Button';
 import Input from './Input';
 
-const ContentInputModal = ({visible, onClose, onSend}) => {
+const ContentInputModal = ({visible, onClose, onSend, placeholder}) => {
   const [content, setContent] = useState(null);
   const handleSend = () => {
     onSend(content);
@@ -24,7 +24,7 @@ const ContentInputModal = ({visible, onClose, onSend}) => {
             value={content}
             onChangeText={setContent}
             grayText
-            text="Oda adı..."
+            text={placeholder}
           />
         </View>
         <Button onPress={handleSend} title="Ekle" />

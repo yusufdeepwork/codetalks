@@ -29,6 +29,7 @@ const Home = ({navigation}) => {
         onSend={handleRoomInput}
         visible={isOpen}
         onClose={toggleContent}
+        placeholder={'Oda adı...'}
       />
       <FloatingButton onPress={toggleContent} iconType="plus" />
     </View>
